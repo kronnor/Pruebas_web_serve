@@ -1,0 +1,63 @@
+{
+  "name": "angular-ng-autocomplete",
+  "version": "2.0.12",
+  "description": "Angular autocomplete",
+  "keywords": [
+    "angular",
+    "angular-ng-autocomplete",
+    "angular autocomplete",
+    "angular-autocomplete",
+    "angular-auto-complete",
+    "autocomplete-component",
+    "ng-autocomplete",
+    "auto complete",
+    "autocomplete",
+    "angular-6",
+    "angular-7",
+    "angular-8",
+    "angular-9",
+    "angular-10",
+    "angular-11",
+    "angular-12",
+    "angular-13",
+    "angular-14"
+  ],
+  "author": {
+    "name": "Giorgi Merabishvili",
+    "email": "gtmerabishvili@gmail.com",
+    "url": "https://www.linkedin.com/in/giorgi-merabishvili-3719a2121/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gmerabishvili/angular-autocomplete"
+  },
+  "homepage": "https://gmerabishvili.github.io/angular-ng-autocomplete/",
+  "peerDependencies": {
+    "@angular/common": "*",
+    "@angular/core": "*"
+  },
+  "module": "fesm2015/angular-ng-autocomplete.mjs",
+  "es2020": "fesm2020/angular-ng-autocomplete.mjs",
+  "esm2020": "esm2020/angular-ng-autocomplete.mjs",
+  "fesm2020": "fesm2020/angular-ng-autocomplete.mjs",
+  "fesm2015": "fesm2015/angular-ng-autocomplete.mjs",
+  "typings": "angular-ng-autocomplete.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./angular-ng-autocomplete.d.ts",
+      "esm2020": "./esm2020/angular-ng-autocomplete.mjs",
+      "es2020": "./fesm2020/angular-ng-autocomplete.mjs",
+      "es2015": "./fesm2015/angular-ng-autocomplete.mjs",
+      "node": "./fesm2015/angular-ng-autocomplete.mjs",
+      "default": "./fesm2020/angular-ng-autocomplete.mjs"
+    }
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
