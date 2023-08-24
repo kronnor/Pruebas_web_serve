@@ -1,0 +1,258 @@
+<div class="imagen">
+    <img src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+        height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+<!--FORMULARIO-->
+
+<body class="elemento">
+    <div class="card" *ngIf="!modificar">
+        <h1>Ficha de Solicitud en la Institución</h1>
+        <div class="content">
+            <form ngNativeValidate (ngSubmit)="guardar()">
+                <div class="step-counter">
+                    <p>Paso {{ step }} de {{ totalSteps }} </p>
+                    <div class="user-details" *ngIf="step === 1">
+                        <div class="input-box">
+                            <span class="details">No. Solicitud:</span>
+                            <input type="text" class="form-control" [(ngModel)]="prestamo.id" disabled name="id"
+                                required>
+
+                            <span class="details">Carrera:</span>
+                            <input type="text" class="form-control" *ngIf="carEst==true" value="{{carreraEst}}"
+                                name="nombres" required disabled>
+                            <select class="combo form-select" *ngIf="carEst==false" (change)="seleccionT($event)"
+                                name="carrera" required>
+                                <option disabled selected>Seleccione una carrera</option>
+                                <option *ngFor="let carrera of carreras" value="{{carrera.id}}"> {{carrera.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Nombres:</span>
+                            <input type="text" class="form-control" value="{{prestamo.idSolicitante?.nombres}}"
+                                name="nombres" required disabled>
+
+                            <span class="details">Apellidos:</span>
+                            <input type="text" class="form-control" value="{{prestamo.idSolicitante?.apellidos}}"
+                                name="apellidos" required disabled>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Domicilio</span>
+                            <input type="text" class="form-control" disabled
+                                value="{{prestamo.idSolicitante?.direccion}}" name="domicilio" required>
+
+                            <span class="details">Celular:</span>
+                            <input type="number" value="{{prestamo.idSolicitante?.celular}}" class="form-control"
+                                name="celular" required disabled>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Correo Electronico:</span>
+                            <input type="email" value="{{prestamo.idSolicitante?.correo}}" class="form-control"
+                                name="correo" required disabled>
+                        </div>
+                    </div>
+
+                    <div class="user-details" *ngIf="step === 2">
+                        <div class="input-box">
+                            <span class="details">Titulo:</span>
+                            <input type="text" value="{{prestamo.libro?.titulo}}" class="form-control" name="titulo"
+                                required disabled>
+
+                            <span class="details">Codigo:</span>
+                            <input type="text" value="{{prestamo.libro?.codigoDewey}}" class="form-control"
+                                name="codigoDewey" required disabled>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Documento Habilitante:</span>
+                            <select class="combo form-select" (change)="seleccionD($event)" name="carrera" required>
+                                <option disabled selected>Seleccione alguna</option>
+                                <option value=1>Cédula</option>
+                                <option value=2>Licencia</option>
+                                <option value=3>Pasaporte</option>
+                            </select>
+                            <span class="details">Bibliotecario que entrega:</span>
+                            <input type="text" class="form-control" name="correo" disabled
+                                value="{{persona.nombres}}&nbsp;{{persona.apellidos}}" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Fecha de Prestamo:</span>
+                            <input type="text" class="form-control" name="fecha_entrega" disabled value="{{fechaHoy}}">
+
+                            <span class="details">Fecha de Devolucion:</span>
+                            <input type="text" class="form-control" name="fecha_devolucion" disabled
+                                value="{{fechaHoy}}">
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="button text-center">
+                    <button type="button" class="btn btn-outline-secondary btn-lg mx-3" (click)="retroceder1()"
+                        *ngIf="step > 1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                            <path fill-rule="evenodd"
+                                d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                        </svg> Retroceder
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-lg mx-3" (click)="avanzar1()"
+                        *ngIf="step < 2">
+                        Siguiente <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                            <path fill-rule="evenodd"
+                                d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                    <button type="submit" class="btn btn-outline-success btn-lg mx-3" *ngIf="step === 2">
+                        Guardar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-folder-check" viewBox="0 0 16 16">
+                            <path
+                                d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
+                            <path
+                                d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+    <div class="card" *ngIf="modificar">
+        <h1>Ficha de Solicitud Modificar</h1>
+        <div class="content">
+            <form ngNativeValidate (ngSubmit)="guardar2()">
+                <div class="step-counter">
+                    <p>Paso {{ step }} de {{ totalSteps }} </p>
+                    <div class="user-details" *ngIf="step === 1">
+                        <div class="input-box">
+                            <span class="details">No. Solicitud:</span>
+                            <input type="text" class="form-control" [(ngModel)]="prestamo2.id" disabled name="id"
+                                required>
+
+                            <span class="details">Carrera:</span>
+                            <input type="text" class="form-control" value="{{prestamo2.carrera?.nombre}}" disabled
+                                name="id" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Nombres:</span>
+                            <input type="text" class="form-control" disabled
+                                value="{{prestamo2.idSolicitante?.nombres}}" name="nombres" required>
+
+                            <span class="details">Apellidos:</span>
+                            <input type="text" class="form-control" disabled
+                                value="{{prestamo2.idSolicitante?.apellidos}}" name="apellidos" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Domicilio</span>
+                            <input type="text" class="form-control" disabled
+                                value="{{prestamo2.idSolicitante?.direccion}}" name="domicilio" required>
+
+                            <span class="details">Celular:</span>
+                            <input type="number" value="{{prestamo2.idSolicitante?.celular}}" disabled
+                                class="form-control" name="celular" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Correo Electronico:</span>
+                            <input type="email" value="{{prestamo2.idSolicitante?.correo}}" disabled
+                                class="form-control" name="correo" required>
+                        </div>
+                    </div>
+
+                    <div class="user-details" *ngIf="step === 2">
+                        <div class="input-box">
+                            <span class="details">Titulo:</span>
+                            <input type="text" value="{{prestamo2.libro?.titulo}}" disabled class="form-control"
+                                name="titulo" required>
+
+                            <span class="details">Codigo:</span>
+                            <input type="text" value="{{prestamo2.libro?.codigoDewey}}" disabled class="form-control"
+                                name="codigoDewey" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Documento Habilitante:</span>
+                            <input type="text" value="{{prestamo2.documentoHabilitante}}" disabled class="form-control"
+                                name="codigoDewey" required>
+                            <span class="details">Bibliotecario que entrega:</span>
+                            <input type="text" class="form-control" disabled
+                                value="{{prestamo2.idEntrega?.nombres}}{{prestamo.idEntrega?.apellidos}}" required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details" style="width: 50%;">Fecha anterior de devolución:</span>
+                            <input type="text" class="form-control" name="fecha_entrega" disabled required
+                                value="{{prestamo2.fechaMaxima}}">
+                        </div>
+                        <hr>
+                        <div class="input-box" *ngIf="boton==false">
+                            <button type="button" class="button5 botones" (click)="prestInst()"> Prestamo en el
+                                instituto</button>
+                            <button type="button" class="button5 botones" (click)="prestDomic()"> Prestamo en el
+                                domicilio</button>
+                        </div>
+
+                        <div class="input-box" *ngIf="boton">
+                            <span class="details">Nueva fecha de prestamo:</span>
+                            <input type="text" class="form-control" name="fecha_entrega" disabled required
+                                value="{{fechaHoy}}">
+
+                            <span class="details">Nueva fecha de devolución:</span>
+                            <input type="text" class="form-control" name="fecha_entrega" disabled *ngIf="prestIn==true"
+                                required value="{{fechaHoy}}">
+                            <input type="text" class="form-control" name="fecha_devolucion" disabled
+                                *ngIf="prestIn==false" required value="{{fechaDespues}}">
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="button text-center">
+                    <button type="button" class="btn btn-outline-secondary btn-lg mx-3" (click)="retroceder1()"
+                        *ngIf="step > 1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                            <path fill-rule="evenodd"
+                                d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                        </svg> Retroceder
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-lg mx-3" (click)="avanzar()"
+                        *ngIf="step < 2">
+                        Siguiente <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                            <path fill-rule="evenodd"
+                                d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                    <button type="submit" class="btn btn-outline-success btn-lg mx-3" *ngIf="step === 2">
+                        Guardar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-folder-check" viewBox="0 0 16 16">
+                            <path
+                                d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
+                            <path
+                                d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,62 @@
+<body>
+  <div>
+    
+    <button class="button type1" (click)="openPopup()">
+    </button>
+</div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="text-align: center;">
+        <h1>Sugerencias de nuevo libro</h1>
+        <div  class="input-box">
+          <span class="details">Carrera:</span>
+          <select class="combo form-select" (change)="seleccionT($event)" name="carrera" required>
+            <option disabled selected>Seleccione una carrera</option>
+            <option *ngFor="let carrera of carreras" value="{{carrera.id}}"> {{carrera.nombre}}
+            </option>
+          </select>
+        </div>
+
+        <div class="modal-body">
+          <textarea class="form-control" placeholder="Dejanos una sugerencias de algun libro"
+            [(ngModel)]="sugerencia.descripcion" name="descripcion" id="floatingTextarea"></textarea>
+        </div>
+        <div class="buttonspop">
+        <button type="button" class="btn1" (click)="GuardarSuger()">
+          Guardar
+        </button>
+        <button type="button"  class="btn2" (click)="closeopopup()">
+          Cerrar
+        </button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contenedor">
+    <div class="tarjeta">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1992.3881407472752!2d-78.97512357175827!3d-2.880778786525254!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfd4a76bc986f8990!2sInstituto%20Superior%20Tecnologico%20Del%20Azuay!5e0!3m2!1ses!2sec!4v1662004355970!5m2!1ses!2sec"
+        width="400" height="200" style="border:0;" class="rounded row align-items-center" allowfullscreen=""
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+
+    <div class="tarjeta row justify-content-right">
+      <h1 class="text-white" style="font-size: larger;">Contactanos</h1>
+      <h4 class="text-white" style="font-size: medium;">
+        <p> Dirección: Octavio Chacón Moscoso 1-98 <br>y Primera Transversal (Parque industrial)</p>
+
+        <p>Teléfono: 07 2809 551 - 0995363076</p>
+        <p>Correo Electrónico:
+          <a href=»info@tecazuay.edu.ec»>info@tecazuay.edu.ec</a>
+        </p>
+      </h4>
+    </div>
+    <div class="tarjeta row align-items-start  ">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/Imagenes%2Fbibliotecaimg2.jpg?alt=media&token=3bf58c80-e1aa-4a69-9e0a-0bafd82628a5"
+        alt="" class="rounded" width="200" height="200">
+    </div>
+  </div>
+</body>

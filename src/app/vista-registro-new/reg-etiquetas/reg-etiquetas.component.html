@@ -1,0 +1,63 @@
+<div class="imagen">
+    <img src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+        height="80" width="350">
+</div>
+
+<body class="elemento">
+    <div class="container">
+        <div class="title">Elija Al Menos Una Etiqueta Para "{{titulolibro}}"</div>
+        <div class="content">
+            <form (ngSubmit)="guardar()">
+                <span class="details">Etiquetas Disponibles:</span>
+                <select name="EtiquetaSelect" (change)="obteneretiqueta($event)" class="form-select" aria-label="Default select example">
+                    <option selected disabled value="0">Seleccione</option>
+                    <option #TSelect value>
+                    <option #TSelect *ngFor="let eti of etiquetas" value="{{eti.id}}">{{eti.nombre}}
+                    </option>
+                </select>
+
+                <div class="button text-center">
+                    <button type="submit"  class="btn btn-success">Guardar</button>
+                </div>
+
+            </form>
+
+            <ng-container *ngIf="etiquetaL.length > 0; else noEtiquetas">
+                <div class="tablas">
+                    <table class="table">
+                        <caption>Etiquetas Asignadas</caption>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Etiqueta</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                            <tr *ngFor="let fila of etiquetaL">
+                                <td>{{fila.id}}</td>
+                                <td>{{fila.etiqueta?.nombre}}</td>
+                                <td><button type="button" (click)="eliminarEti(fila.id!)" class="btn btn-danger">Eliminar</button></td>
+                            </tr>
+        
+                        </tbody>
+                    </table>
+                </div>
+                
+
+                <div class="button text-center">
+                    <button type="button" class="btn btn-success"
+                    routerLink="/app-vista-registro-new">Registrar Otro Libro</button>
+                </div>
+
+            </ng-container>
+
+            <ng-template #noEtiquetas>
+                <p>Este libro no tiene etiquetas asignadas</p>
+              </ng-template>
+        </div>
+
+    </div>
+
+</body>

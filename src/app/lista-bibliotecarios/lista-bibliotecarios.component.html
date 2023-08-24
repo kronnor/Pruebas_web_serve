@@ -1,0 +1,64 @@
+<div class="imagen">
+  <img
+    src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+    height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+
+
+<body class="elemento">
+  <div class="card">
+    <h1>Lista de bibliotecarios</h1>
+    <div class="buscar">
+      <form class="d-flex buscar" role="search">
+        <input class="form-control me-2" (keyup)="onKeydownEvent($event, buscaer.value)" #buscaer type="search"
+          placeholder="Buscar por cédula" aria-label="Buscar" style="background-color: #e5e7e8; border-color: #2E2F5E;">
+        
+      </form>
+    </div>
+    <div class="contenedor">
+      <table class="table">
+        <thead class="text-center cabezera">
+          <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+
+        </thead>
+        <tbody class="text-center" *ngIf=!bus>
+          <tr *ngFor="let bibliotecario of bibliotecarios">
+            <td #cedula>{{bibliotecario.cedula}}</td>
+            <td #cedula>{{bibliotecario.nombres}}&nbsp;{{ bibliotecario.apellidos}}</td>
+            <td #rol *ngIf="bibliotecario.tipo==4 else menor">Administrador</td>
+            <ng-template #menor>
+              <td *ngIf="bibliotecario.tipo==3">Bibliotecario</td>
+            </ng-template>
+            <td #activo *ngIf="bibliotecario.activo else mm">Activo</td>
+            <ng-template #mm>
+              <td>Inactivo</td>
+            </ng-template>
+            <td class="td1"><button (click)="modificar(bibliotecario)">Modificar</button></td>
+          </tr>
+        </tbody>
+
+        <tbody class="text-center" *ngIf="bus">
+          <tr>
+            <td>{{Bibliotecario.cedula}}</td>
+            <td #cedula>{{Bibliotecario.nombres}}</td>
+            <td *ngIf="Bibliotecario?.tipo==4 else menor">Administrador</td>
+            <ng-template #menor>
+              <p>Bibliotecario</p>
+            </ng-template>
+            <td *ngIf="Bibliotecario.activo else mm">Activo</td>
+            <ng-template #mm>
+              <td>Inactivo</td>
+            </ng-template>
+            <td class="td1"><button (click)="modificar(Bibliotecario)">Modificar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>

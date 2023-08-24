@@ -1,0 +1,305 @@
+<div class="imagen">
+    <img src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+        height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+
+<body>
+    <div class="card">
+        <h1>Datos del libro</h1>
+        <div class="content">
+            <form ngNativeValidate>
+                <div class="step-counter">
+                    <p>Paso {{ step }} de {{ totalSteps }} </p>
+                    <button class="boton" (click)="editar()">Editar&nbsp;
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil" viewBox="0 0 16 16">
+                            <path
+                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg>
+                    </button>
+                    <button class="boton" (click)="agregarEtiqueta()"
+                        style="margin-left: 80%; margin-top: -3.3%;">Agregar
+                        Etiqueta
+                    </button>
+                    <div class="user-details" *ngIf="step === 1">
+
+                        <div class="input-box">
+                            <span class="details">Id del libro:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.id" disabled name="id" required>
+                            <span class="details">Código ISBN:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.conIsbn" [disabled]="isDisabled"
+                                name="conIsbn" required>
+
+                            <span class="details">Código Dewey:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.codigoDewey" name="codigoDewey"
+                                required [disabled]="isDisabled">
+                        </div>
+                        <hr>
+                        <div class="input-box">
+                            <span class="details">Adquisición:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.adquisicion"
+                                [disabled]="isDisabled" name="adquisicion" required>
+                            <span class="details">Titulo:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.titulo" name="nombres" required
+                                [disabled]="isDisabled">
+                            <span class="details">Subtítulo:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.subtitulo"
+                                [disabled]="isDisabled" name="subtitulo" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Indice 1:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.indiceUno" name="indiceUno"
+                                required [disabled]="isDisabled">
+
+                            <span class="details">Indice 2:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.indiceDos" name="indiceDos"
+                                required [disabled]="isDisabled">
+
+                            <span class="details">Indice 3:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.indiceTres" name="indiceTres"
+                                required [disabled]="isDisabled">
+                        </div>
+                        <div class="input-box">
+                            <span class="details" style="width: 12%;">Descripción:</span>
+                            <input type="text" style="width: 100%;" class="form-control" [(ngModel)]="libro.descripcion"
+                                name="descripcion" required [disabled]="isDisabled">
+                        </div>
+
+                    </div>
+
+                    <div class="user-details" *ngIf="step === 2">
+                        <div class="input-box">
+                            <div class="cont">
+                                <span class="details"> Estado del libro:</span>
+                                <input type="text" class="form-control"
+                                    value="{{getNombreEstadoLibro2(libro.estadoLibro)}}" required disabled>
+                            </div>
+                            <div class="cont" *ngIf="isDisabled==false">
+                                <span class="details" style="width: 100%;"> Nuevo Estado:</span>
+                                <select class="combo form-select" name="carrera" required>
+                                    <option disabled selected>Seleccione alguna</option>
+                                    <option value=1>Nuevo</option>
+                                    <option value=2>Bueno</option>
+                                    <option value=3>Regular</option>
+                                    <option value=4>Malo</option>
+                                    <option value=5>No Utilizable</option>
+                                </select>
+                            </div>
+                            <div class="cont">
+                                <span class="details">Disponibilidad:</span>
+                                <input type="text" class="form-control" value="{{disp}}" disabled required>
+                            </div>
+                            <div class="cont" style="width: 25%;" *ngIf="isDisabled==false">
+                                <span class="details">Nueva Disponibilidad:</span>
+                                <select class="combo form-select" name="carrera" required>
+                                    <option disabled selected>Seleccione alguna</option>
+                                    <option value=1>Disponible</option>
+                                    <option value=2>No Disponible</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="input-box">
+                            <span class="details">Dimesiones:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.dimenciones"
+                                [disabled]="isDisabled" name="dimenciones" required>
+
+                            <span class="details">N° de Páginas:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.numPaginas" name="numPaginas"
+                                required [disabled]="isDisabled">
+                            <span class="details">Idioma:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.idioma" name="idioma" required
+                                [disabled]="isDisabled">
+                        </div>
+                        <hr>
+                        <div class="input-box">
+                            <span class="details">Editor:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.editor" [disabled]="isDisabled"
+                                name="editor" required>
+
+                            <span class="details">Area:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.area" name="area" required
+                                [disabled]="isDisabled">
+                            <span class="details">Publicado en:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.anioPublicacion"
+                                name="anioPublicacion" required [disabled]="isDisabled">
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Ciudad:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.ciudad" [disabled]="isDisabled"
+                                name="ciudad" required>
+                            <span class="details">URL:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.urlDigital"
+                                [disabled]="isDisabled" name="urlDigital" required>
+
+                            <span class="details">Fecha de creación:</span>
+                            <input type="text" class="form-control" [(ngModel)]="libro.fechaCreacion" disabled
+                                name="fechaCreacion" required>
+                        </div>
+                    </div>
+
+                    <div class="user-details" *ngIf="step === 3">
+                        <div class="input-box">
+                            <div class="cont">
+                                <span class="details">Autor:</span>
+                                <input type="text" class="form-control" value="{{autores_libros.autor?.nombre}}"
+                                    disabled name="adquisicion" required>
+                            </div>
+                            <div class="cont" *ngIf="isDisabled==false">
+                                <span class="details">Nuevo Autor:</span>
+                                <div style="width: 100%;">
+                                    <ng-autocomplete [data]="dato | async" [searchKeyword]="keyword"
+                                        (selected)="capturarAutor($event)" [itemTemplate]="itemTemplate"
+                                        formControlName="autor" [notFoundTemplate]="notFoundTemplate"
+                                        placeholder="Ingrese el nombre del autor">
+                                    </ng-autocomplete>
+                                    <!-- Mensaje de error para el autocompletar -->
+                                    <!--- <div class="error-message"
+                                        *ngIf="librosF.get('autor')?.hasError('autorNoSeleccionado') && (librosF.get('autor')?.dirty || librosF.get('autor')?.touched)">
+                                        El campo es obligatorio. 
+                                        <br>Por favor, seleccione un autor válido.
+                                    </div>-->
+                                    <ng-template #itemTemplate let-item>
+                                        <a [innerHTML]="item.nombre"></a>
+                                    </ng-template>
+                                    <ng-template #notFoundTemplate let-notFound>
+                                        <div [innerHTML]="notFound"></div>
+                                    </ng-template>
+
+
+
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="details">Tipo:</span>
+                                <input type="text" class="form-control" value="{{libro.tipo?.nombre}}" required
+                                    disabled>
+                            </div>
+                            <div class="cont" *ngIf="isDisabled==false">
+                                <span class="details">Nuevo Tipo:</span>
+                                <div style="width: 100%;">
+                                    <ng-autocomplete [data]="dato | async" [searchKeyword]="keyword"
+                                        (selected)="capturarAutor($event)" [itemTemplate]="itemTemplate"
+                                        formControlName="autor" [notFoundTemplate]="notFoundTemplate"
+                                        placeholder="Ingrese el nombre del tipo">
+                                    </ng-autocomplete>
+                                    <!-- Mensaje de error para el autocompletar -->
+                                    <!--- <div class="error-message"
+                                        *ngIf="librosF.get('autor')?.hasError('autorNoSeleccionado') && (librosF.get('autor')?.dirty || librosF.get('autor')?.touched)">
+                                        El campo es obligatorio. 
+                                        <br>Por favor, seleccione un autor válido.
+                                    </div>-->
+                                    <ng-template #itemTemplate let-item>
+                                        <a [innerHTML]="item.nombre"></a>
+                                    </ng-template>
+                                    <ng-template #notFoundTemplate let-notFound>
+                                        <div [innerHTML]="notFound"></div>
+                                    </ng-template>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-box">
+                            <div class="cont" style="width: 50%;">
+                                <span class="details">Bibliotecario que Registra:</span>
+                                <input type="text" class="form-control"
+                                    value="{{libro.persona?.nombres}}&nbsp;{{libro.persona?.apellidos}}" disabled
+                                    name="adquisicion" required>
+                            </div>
+                            <div class="cont">
+                                <span class="details">Donante:</span>
+                                <input type="text" class="form-control" value="{{libro.tipo?.nombre}}" required
+                                    disabled>
+                            </div>
+                            <div class="cont" *ngIf="isDisabled==false">
+                                <span class="details">Nuevo Donante:</span>
+                                <div style="width: 100%;">
+                                    <ng-autocomplete [data]="dato | async" [searchKeyword]="keyword"
+                                        (selected)="capturarAutor($event)" [itemTemplate]="itemTemplate"
+                                        formControlName="autor" [notFoundTemplate]="notFoundTemplate"
+                                        placeholder="Ingrese el nombre del donante">
+                                    </ng-autocomplete>
+                                    <!-- Mensaje de error para el autocompletar -->
+                                    <!--- <div class="error-message"
+                                            *ngIf="librosF.get('autor')?.hasError('autorNoSeleccionado') && (librosF.get('autor')?.dirty || librosF.get('autor')?.touched)">
+                                            El campo es obligatorio. 
+                                            <br>Por favor, seleccione un autor válido.
+                                        </div>-->
+                                    <ng-template #itemTemplate let-item>
+                                        <a [innerHTML]="item.nombre"></a>
+                                    </ng-template>
+                                    <ng-template #notFoundTemplate let-notFound>
+                                        <div [innerHTML]="notFound"></div>
+                                    </ng-template>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-details" *ngIf="step === 4">
+                        <div class="input-box">
+                            <img src="{{urlI}}" alt="" width="200" height="200">
+                        </div>
+                        <div class="input-box" style="align-content: center;" *ngIf="isDisabled==false">
+                            <span class="details" style="width: 20%;">Imagen:</span>
+                            <div *ngIf="previsualizacion" style="align-content: center;">
+                                <img width="230px" [src]="previsualizacion" alt="">
+                            </div>
+                            <label id="boton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+                                    <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
+                                    <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+                                  </svg>
+                            </label>&nbsp;&nbsp;
+                            <input id="subir" accept="image/*" formControlName="urlImagen"
+                                (change)="capturarImagen($event)" type="file" name="Image">
+                        </div>
+                    </div>
+
+                    <div class="button text-center" style="display: flex;">
+                        <button type="button" (click)="retroceder1()" *ngIf="step > 1" style="margin-left: 20%;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                            </svg> Retroceder
+                        </button>
+                        <button type="button" (click)="avanzar1()" style="margin-left: 40%;" *ngIf="step < 4">
+                            Siguiente <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                                <path fill-rule="evenodd"
+                                    d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </button>
+                        <button type="submit" *ngIf="step === 4 && isDisabled==false" style="margin-left: 50%;">
+                            Guardar Editado<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-folder-check" viewBox="0 0 16 16">
+                                <path
+                                    d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
+                                <path
+                                    d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z" />
+                            </svg>
+                        </button>
+                        <button type="button" *ngIf="step === 4 && isDisabled==true" style="margin-left: 50%;">
+                            Aceptar<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-folder-check" viewBox="0 0 16 16">
+                                <path
+                                    d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
+                                <path
+                                    d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,161 @@
+<div class="imagen">
+  <img
+    src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+    height="60" width="200" style="margin-left: 10%; margin-top: 3%;">
+</div>
+
+<body>
+  
+    <div class="card">
+      <h1>Reporte de sugerencias por ciclo</h1>
+      <div class="contenedor">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" >Cedula</th>
+              <th scope="col" style="width: 140px">Fecha</th>
+              <th scope="col" >Carrera</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sugerencia of sugerencias">
+              <td>{{ sugerencia.persona?.cedula}}</td>
+              <td>{{ sugerencia.fecha}}</td>
+              <td>{{ sugerencia.carrera?.nombre}}</td>
+              <td>{{ sugerencia.descripcion}}</td>
+              <td><button type="submit" (click)="abrirpopup(sugerencia)">Imprimir PDF</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+    <div class="overlay4" id="overlay4">
+      <div class="popup4" id="popup4">
+        <h3>Datos de la Asignatura y su Bibliografia</h3>
+
+        <h5>Descripción de la sugerencia <strong>"{{sugerenciaGet.descripcion}}"</strong></h5>
+
+
+        <div class="content">
+          <form ngNativeValidate (ngSubmit)="cerrarpopup()">
+            <div class="input-box">
+              <span class="details">Nombre de la Asignatura:</span>
+              <input type="text" class="form-control text-center" placeholder="Nombre de la asignatura" name="asignatura"
+              [(ngModel)]="nombreasig"
+                required>
+            </div>
+  
+            <div class="input-box">
+              <span class="details">Datos del Documento:</span>
+              <input type="text" class="form-control text-center" placeholder="Ingrese los datos" name="datos" [(ngModel)]="datosdocu" required>
+            </div>
+  
+            <div class="input-box">
+              <span class="details">Titulo:</span>
+              <input type="text" class="form-control text-center" placeholder="Ingrese el titulo" name="titulo" [(ngModel)]="titulo" required>
+            </div>
+  
+            <div class="input-box">
+              <span class="details">Autor:</span>
+              <input type="text" class="form-control text-center" placeholder="Ingrese el autor" name="autor" [(ngModel)]="autor" required>
+            </div>
+  
+            <div class="input-box">
+              <span class="details">Editorial:</span>
+              <input type="text" class="form-control text-center" placeholder="Ingrese el editorial" name="editorial" [(ngModel)]="editorial"
+                required>
+              <span class="details">Año de edicion:</span>
+              <input type="text" class="form-control text-center" placeholder="Aqui el año de edicion" name="edicion" [(ngModel)]="anioedicion"
+                required>
+            </div>
+            <div class="input-box">
+              <span class="details" style="margin-right: 20%;">Forma de adquisicion:</span>
+  
+              <input class="form-check-input" type="radio" name="flexRadioDefault" value="compra" id="activo3" [(ngModel)]="formaadquisicion"
+                style="height: 20px; width: 20px; " required>
+              &nbsp;&nbsp;<label class="form-check-label" for="flexRadioDefault1" style="margin-right: 10%;">
+                compra
+              </label>
+  
+              <input class="form-check-input" type="radio" name="flexRadioDefault" value="donacion" id="inactivo2" [(ngModel)]="formaadquisicion"
+                style="height: 20px; width: 20px;" required>
+              &nbsp;&nbsp;<label class="form-check-label" for="flexRadioDefault2">
+                donacion
+              </label>
+  
+              <input class="form-check-input" type="radio" name="flexRadioDefault" value="Prestamo" id="inactivo1" [(ngModel)]="formaadquisicion"
+                style="height: 20px; width: 20px;" required>
+              &nbsp;&nbsp;<label class="form-check-label" for="flexRadioDefault2">
+                Prestamo
+              </label>
+            </div>
+  
+            <div class="input-box">
+              <span class="details">Numero de ejemplares:</span>
+              <input type="number" class="form-control text-center" placeholder="Numero del ejemplar" name="celular" [(ngModel)]="numejemplares"
+                required>
+            </div>
+  
+            <div class="input-box">
+              <span class="details" style="margin-right: 20%;">Tipo de material:</span>
+  
+              <input class="form-check-input" type="radio" name="flexRadioDefault6" value="Libro" id="27" [(ngModel)]="tipomaterial"
+                style="height: 20px; width: 20px; " required>
+              &nbsp;&nbsp;<label class="form-check-label" for="flexRadioDefault1" style="margin-right: 10%;">
+                Libro
+              </label>
+  
+              <input class="form-check-input" type="radio" name="flexRadioDefault6" value="CD" id="25" [(ngModel)]="tipomaterial"
+                style="height: 20px; width: 20px;" required>
+              &nbsp;&nbsp;<label class="form-check-label" for="flexRadioDefault2">
+                CD
+              </label>
+  
+              <input class="form-check-input" type="radio" name="flexRadioDefault6" value="DVD" id="223" [(ngModel)]="tipomaterial"
+                style="height: 20px; width: 20px;" required>
+              &nbsp;&nbsp;<label class="form-check-label" for="flexRadioDefault2">
+                DVD
+              </label>
+  
+              <input class="form-check-input" type="radio" name="flexRadioDefault6" value="Otros" id="22" [(ngModel)]="tipomaterial"
+                style="height: 20px; width: 20px;" required>
+              &nbsp;&nbsp;<label class="form-check-label" for="flexRadioDefault2">
+                Otros
+              </label>
+            </div>
+  
+            <div class="input-box">
+              <span class="details">Precio tentativo:</span>
+              <input type="number" class="form-control text-center" placeholder="Precio" name="precio" [(ngModel)]="preciotentativo" required>
+            </div>
+  
+            <div class="input-box">
+              <span class="details">Observacion:</span>
+              <input type="text" class="form-control text-center" placeholder="Observaciones" name="observacion" [(ngModel)]="observaciones" required>
+            </div>
+            <hr>
+           
+            <button type="submit"  id="cerrarpopup" >
+              <FONT COLOR="white">Generar PDF</FONT>
+            </button>
+
+            
+            
+          </form>
+          <button  (click)="cancelarpopup()" >
+            <FONT COLOR="white">Cancelar</FONT>
+          </button>
+        </div>
+        
+        
+        
+      </div>
+    </div>
+  
+  
+</body>

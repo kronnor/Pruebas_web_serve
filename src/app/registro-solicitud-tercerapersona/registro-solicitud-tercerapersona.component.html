@@ -1,0 +1,96 @@
+<div class="imagen">
+    <img src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+        height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+<!--FORMULARIO-->
+
+<body class="elemento">
+    <div class="card">
+        <br>
+        <h1>Ficha de solicitud para una persona externa</h1>
+        <div class="content">
+            <form ngNativeValidate (ngSubmit)="guardar()">
+                <div class="step-counter">
+                    <div class="user-details">
+                            <div class="input-box">
+                                <span class="details">Cedula:</span>
+                                <input #cedula type="text" class="form-control text-center"  (keyup)="onKeydownEvent($event, cedula.value)"
+                                    placeholder="Ingrese un numero de cedula" name="cedula" [(ngModel)]="tercero.cedula"  required>
+
+                            <span class="details">Nombres:</span>
+                            <input type="text" class="form-control" 
+                                name="nombre" [(ngModel)]="tercero.nombre" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Celular:</span>
+                            <input type="number"  class="form-control" [(ngModel)]="tercero.telefono"
+                                name="telefono" required>
+                            <span class="details">Correo Electronico:</span>
+                            <input type="email"  class="form-control"
+                                name="correo" [(ngModel)]="tercero.correo" required>
+                        </div>
+                    </div>
+<hr>
+                    <div class="input-box">
+                        <span class="details">Titulo del libro:</span>
+                        <div class="lib" *ngIf="selectLib==false">
+                            <input type="text" class="form-control" #buscar2 placeholder="Ingrese el titulo del libro"
+                                (keyup)="onKeydownEvent2($event, buscar2.value)">
+                        </div>
+                        <div class="lib" *ngIf="selectLib==true">
+                            <input type="text" value="{{libro.titulo}}" disabled>
+                            <button class="btn otroLib" (click)="otroLib()">Otro Libro</button>
+                        </div>
+                        <span class="details">Codigo:</span>
+                        <input type="text" value="{{libro.codigoDewey}}" class="form-control" name="codigoDewey" disabled
+                            required>
+
+                    </div>
+
+                    <hr>
+                        <div class="input-box">
+                            <span class="details">Documento Habilitante:</span>
+                            <select class="combo form-select" (change)="seleccionD($event)" name="carrera" required>
+                                <option disabled selected>Seleccione alguna</option>
+                                <option value=1>Cédula</option>
+                                <option value=2>Licencia</option>
+                                <option value=3>Pasaporte</option>
+                            </select>
+                            <span class="details">Bibliotecario que entrega:</span>
+                            <input type="text" class="form-control" name="correo" value="{{bibliotecario.nombres}}&nbsp;{{bibliotecario.apellidos}}" disabled>
+                        </div>
+                        <div class="input-box" *ngIf="boton">
+                            <span class="details">Fecha de Prestamo:</span>
+                            <input type="text" class="form-control" name="fecha_entrega" disabled required
+                                value="{{fechaHoy}}">
+    
+                            <span class="details">Fecha de Devolucion:</span>
+                            <input type="text" class="form-control" name="fecha_entrega" disabled required
+                                value="{{fechaHoy}}">
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <button type="submit" class="button5 btn ">
+                        Guardar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-folder-check" viewBox="0 0 16 16">
+                            <path
+                                d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
+                            <path
+                                d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </button>
+
+            </form>
+        </div>
+    </div>
+    <div class="complet-container" *ngIf="selectLib2==false">
+        <div *ngFor="let libro of libros" class="complet" style=" border-color: 1px solid #004f9f;">
+            <button class="botonB" (click)="seleccionarlibro(libro)">{{libro.titulo}}</button>
+        </div>
+    </div>
+</body>

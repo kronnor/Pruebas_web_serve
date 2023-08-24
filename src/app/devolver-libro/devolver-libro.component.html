@@ -1,0 +1,269 @@
+<div class="imagen">
+    <img src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+        height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+<!--FORMULARIO-->
+
+<body class="elemento">
+    <div class="card" *ngIf="solicitudCompleta==false">
+        <h1>Ficha de Devolución</h1>
+        <div class="content">
+            <form ngNativeValidate (ngSubmit)="guardar()">
+                <div class="step-counter">
+                    <p>Paso {{ step }} de {{ totalSteps }} </p>
+                    <div class="user-details" *ngIf="step === 1">
+                        <div class="input-box">
+                            <span class="details">No. Solicitud:</span>
+                            <input type="text" class="form-control" value="{{prestamo.id}}" disabled name="id" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Estado de la solicitud:</span>
+                            <input type="text" class="form-control" value="{{getNombreEstado(prestamo.estadoPrestamo)}}"
+                                disabled name="id" required>
+
+
+
+                            <span class="details">Cedula del solicitante:</span>
+                            <input type="text" class="form-control" value="{{prestamo.idSolicitante?.cedula}}" disabled
+                                name="id" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Documento habilitante:</span>
+                            <input type="text" class="form-control" value="{{hab}}" disabled name="nombres" required>
+
+                            <span class="details">Titulo del libro:</span>
+                            <input type="text" class="form-control" name="apellidos" value="{{prestamo.libro?.titulo}}"
+                                required disabled>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Estado de entrega del libro:</span>
+                            <input type="text" class="form-control" name="domicilio"
+                                value="{{getNombreEstadoLibro(prestamo.libro?.estadoLibro)}}" required disabled>
+                            <span class="details">Estado de actual del libro:</span>
+                            <select class="combo form-select" (change)="seleccionT($event)" name="carrera" required>
+                                <option disabled selected>Seleccione alguna</option>
+                                <option value=1>Bueno</option>
+                                <option value=2>Regular</option>
+                                <option value=3>Malo o Perdido</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="user-details" *ngIf="step === 2">
+                        <div class="input-box">
+                            <span class="details">Fecha entrega:</span>
+                            <input type="text" value="{{prestamo.fechaEntrega}}" disabled class="form-control"
+                                name="correo" required>
+                            <span class="details">Fecha devolución:</span>
+                            <input type="text" class="form-control" name="correo" value="{{prestamo.fechaMaxima}}"
+                                disabled required>
+                        </div>
+                        <div class="input-box">
+                            <span class="">Fecha en la que devuelve:</span>
+                            <input type="text" disabled class="form-control" value="{{fechaHoy}}" name="correo"
+                                required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Bibliotecario que entrega:</span>
+                            <input type="text" class="form-control" disabled
+                                value="{{prestamo.idEntrega?.nombres}}&nbsp;{{prestamo.idEntrega?.apellidos}}"
+                                name="titulo" required>
+
+                            <span class="details">Bibliotecario que recibe:</span>
+                            <input type="text" class="form-control" disabled
+                                value="{{persona.nombres}}&nbsp;{{persona.apellidos}}" name="codigoDewey" required>
+                        </div>
+
+                        <div class="input-box"
+                            style="background-color: white;  display: flex; align-items: center; justify-content: center; border: 1px solid #1862AD;">
+                            <span class="details" style="width: 100%;">Calificación del estudiante:</span>
+                            <label class="container">
+                                <input type="checkbox" (change)="onCheckboxChange($event)">
+                                <svg height="5px" id="Layer_1" version="1.2" viewBox="0 0 24 24" width="5px"
+                                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M9.362,9.158c0,0-3.16,0.35-5.268,0.584c-0.19,0.023-0.358,0.15-0.421,0.343s0,0.394,0.14,0.521    c1.566,1.429,3.919,3.569,3.919,3.569c-0.002,0-0.646,3.113-1.074,5.19c-0.036,0.188,0.032,0.387,0.196,0.506    c0.163,0.119,0.373,0.121,0.538,0.028c1.844-1.048,4.606-2.624,4.606-2.624s2.763,1.576,4.604,2.625    c0.168,0.092,0.378,0.09,0.541-0.029c0.164-0.119,0.232-0.318,0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191    s2.353-2.14,3.919-3.566c0.14-0.131,0.202-0.332,0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375,0.122-0.453,0.294C10.671,6.26,9.362,9.158,9.362,9.158z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </label>
+                            <label class="container">
+                                <input type="checkbox" (change)="onCheckboxChange($event)">
+                                <svg height="5px" id="Layer_1" version="1.2" viewBox="0 0 24 24" width="5px"
+                                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M9.362,9.158c0,0-3.16,0.35-5.268,0.584c-0.19,0.023-0.358,0.15-0.421,0.343s0,0.394,0.14,0.521    c1.566,1.429,3.919,3.569,3.919,3.569c-0.002,0-0.646,3.113-1.074,5.19c-0.036,0.188,0.032,0.387,0.196,0.506    c0.163,0.119,0.373,0.121,0.538,0.028c1.844-1.048,4.606-2.624,4.606-2.624s2.763,1.576,4.604,2.625    c0.168,0.092,0.378,0.09,0.541-0.029c0.164-0.119,0.232-0.318,0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191    s2.353-2.14,3.919-3.566c0.14-0.131,0.202-0.332,0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375,0.122-0.453,0.294C10.671,6.26,9.362,9.158,9.362,9.158z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </label>
+                            <label class="container">
+                                <input type="checkbox" (change)="onCheckboxChange($event)">
+                                <svg height="5px" id="Layer_1" version="1.2" viewBox="0 0 24 24" width="5px"
+                                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M9.362,9.158c0,0-3.16,0.35-5.268,0.584c-0.19,0.023-0.358,0.15-0.421,0.343s0,0.394,0.14,0.521    c1.566,1.429,3.919,3.569,3.919,3.569c-0.002,0-0.646,3.113-1.074,5.19c-0.036,0.188,0.032,0.387,0.196,0.506    c0.163,0.119,0.373,0.121,0.538,0.028c1.844-1.048,4.606-2.624,4.606-2.624s2.763,1.576,4.604,2.625    c0.168,0.092,0.378,0.09,0.541-0.029c0.164-0.119,0.232-0.318,0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191    s2.353-2.14,3.919-3.566c0.14-0.131,0.202-0.332,0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375,0.122-0.453,0.294C10.671,6.26,9.362,9.158,9.362,9.158z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </label>
+                            <label class="container">
+                                <input type="checkbox" (change)="onCheckboxChange($event)">
+                                <svg height="5px" id="Layer_1" version="1.2" viewBox="0 0 24 24" width="5px"
+                                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M9.362,9.158c0,0-3.16,0.35-5.268,0.584c-0.19,0.023-0.358,0.15-0.421,0.343s0,0.394,0.14,0.521    c1.566,1.429,3.919,3.569,3.919,3.569c-0.002,0-0.646,3.113-1.074,5.19c-0.036,0.188,0.032,0.387,0.196,0.506    c0.163,0.119,0.373,0.121,0.538,0.028c1.844-1.048,4.606-2.624,4.606-2.624s2.763,1.576,4.604,2.625    c0.168,0.092,0.378,0.09,0.541-0.029c0.164-0.119,0.232-0.318,0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191    s2.353-2.14,3.919-3.566c0.14-0.131,0.202-0.332,0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375,0.122-0.453,0.294C10.671,6.26,9.362,9.158,9.362,9.158z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </label>
+                            <label class="container">
+                                <input type="checkbox" (change)="onCheckboxChange($event)">
+                                <svg height="5px" id="Layer_1" version="1.2" viewBox="0 0 24 24" width="5px"
+                                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M9.362,9.158c0,0-3.16,0.35-5.268,0.584c-0.19,0.023-0.358,0.15-0.421,0.343s0,0.394,0.14,0.521    c1.566,1.429,3.919,3.569,3.919,3.569c-0.002,0-0.646,3.113-1.074,5.19c-0.036,0.188,0.032,0.387,0.196,0.506    c0.163,0.119,0.373,0.121,0.538,0.028c1.844-1.048,4.606-2.624,4.606-2.624s2.763,1.576,4.604,2.625    c0.168,0.092,0.378,0.09,0.541-0.029c0.164-0.119,0.232-0.318,0.195-0.505c-0.428-2.078-1.071-5.191-1.071-5.191    s2.353-2.14,3.919-3.566c0.14-0.131,0.202-0.332,0.14-0.524s-0.23-0.319-0.42-0.341c-2.108-0.236-5.269-0.586-5.269-0.586    s-1.31-2.898-2.183-4.83c-0.082-0.173-0.254-0.294-0.456-0.294s-0.375,0.122-0.453,0.294C10.671,6.26,9.362,9.158,9.362,9.158z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="button text-center">
+                    <button type="button" class="" style="margin-left: 30%; margin-top: 1%;" (click)="retroceder1()" *ngIf="step > 1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                            <path fill-rule="evenodd"
+                                d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                        </svg> Retroceder
+                    </button>
+                    <button type="button" (click)="avanzar1()" *ngIf="step < 2" style="margin-left: 70%;">
+                        Siguiente <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+                            <path fill-rule="evenodd"
+                                d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                    <button type="submit" *ngIf="step === 2" style="margin-left: 70%; margin-top: -2.8%; position: absolute;">
+                        Guardar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-folder-check" viewBox="0 0 16 16">
+                            <path
+                                d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
+                            <path
+                                d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                    </button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+    <div class="card" *ngIf="solicitudCompleta==true">
+        <h1 style="margin-top: 0%;">Prestamo</h1>
+        <div class="content">
+            <form (ngSubmit)="guardar()">
+                <div class="step-counter">
+                    <div class="input-box">
+                        <span class="details2">No. Solicitud:</span>
+                        <input type="text" class="input2 form-control" value="{{prestamo.id}}" disabled name="id"
+                            required>
+
+                        <span class="details2">Estado de la solicitud:</span>
+                        <input type="text" class="input2 form-control"
+                            value="{{getNombreEstado(prestamo.estadoPrestamo)}}" disabled name="id" required>
+                    </div>
+                    <hr>
+                    <div class="input-box">
+                        <span class="details2">Cedula del solicitante:</span>
+                        <input type="text" class="input2 form-control" value="{{prestamo.idSolicitante?.cedula}}"
+                            disabled name="id" required>
+                        <span class="details2">Nombre del solicitante:</span>
+                        <input type="text" class="input2 form-control letra" value="{{prestamo.idSolicitante?.nombres}}"
+                            disabled name="id" required>
+                        <input type="text" class="input2 form-control letra" style="margin-left: -12%;"
+                            value="{{prestamo.idSolicitante?.apellidos}}" disabled name="id" required>
+                    </div>
+                    <hr>
+                    <div class="input-box">
+                        <span class="details2">Documento habilitante:</span>
+                        <input type="text" class="input2 form-control" value="{{hab}}" disabled name="nombres" required>
+
+                        <span class="details2">Titulo del libro:</span>
+                        <input type="text" class="input2 form-control" name="apellidos"
+                            value="{{prestamo.libro?.titulo}}" required disabled>
+                    </div>
+                    <div class="input-box">
+                        <span class="details2">Estado de entrega del libro:</span>
+                        <input type="text" class="input2 form-control" name="domicilio"
+                            value="{{getNombreEstadoLibro2(prestamo.libro?.estadoLibro)}}" required disabled>
+                        <span class="details">Estado de final del libro:</span>
+                        <input type="text" class="input2 form-control" name="domicilio"
+                            value="{{getNombreEstadoLibro(prestamo.estadoLibro)}}" required disabled>
+                    </div>
+
+                </div>
+                <hr>
+                <div class="input-box">
+                    <span class="details2">Fecha entrega:</span>
+                    <input type="email" value="{{prestamo.fechaEntrega}}" disabled class="input2 form-control"
+                        name="correo" required>
+                    <span class="details">Fecha devolución:</span>
+                    <input type="email" class="input2 form-control" name="correo" value="{{prestamo.fechaMaxima}}"
+                        disabled required>
+                    <span class="details2">Fecha en la que devuelve:</span>
+                    <input type="date" class="input2 form-control" value="{{prestamo.fechaDevolucion}}" disabled
+                        name="correo" required>
+                </div>
+                <hr>
+                <div class="input-box">
+                    <span class="details2">Bibliotecario que entrega:</span>
+                    <input type="text" class="input2 form-control letra" disabled
+                        value="{{prestamo.idEntrega?.nombres}}" name="titulo" required>
+                    <input type="text" class="input2 form-control letra" style="margin-left: -12%;"
+                        value="{{prestamo.idEntrega?.apellidos}}" disabled name="id" required>
+                    <span class="details2">Bibliotecario que recibe:</span>
+                    <input type="text" class="input2 letra form-control" disabled
+                        value="{{prestamo.idRecibido?.nombres}}" name="codigoDewey" required>
+                    <input type="text" class="input2 form-control letra" style="margin-left: -12%;"
+                        value="{{prestamo.idRecibido?.apellidos}}" disabled name="id" required>
+                </div>
+                <button routerLink="/app-lista-solicitudes-pendientes">Aceptar</button>
+            </form>
+        </div>
+    </div>
+</body>

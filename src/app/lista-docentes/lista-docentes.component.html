@@ -1,0 +1,60 @@
+<div class="imagen">
+    <img src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+        height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+<!--FORMULARIO-->
+
+
+
+
+
+<body class="elemento">
+    <div class="card">
+        <h1>Lista de docentes</h1>
+        <form class="buscar">
+            <input class="form-control me-2" (keyup)="onKeydownEvent($event, buscaer.value)" #buscaer type="search"
+              placeholder="Buscar por cedula" aria-label="Buscar" style="background-color: #e5e7e8; border-color: #2e2f5e" />
+            
+          </form>
+        <div class="contenedor">
+            <table class="table">
+                <thead class="text-center cabezera">
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Celular</th>
+                        <th>Estado</th>
+                        <th>Accion</th>
+                    </tr>
+
+                </thead>
+                <tbody class="text-center" *ngIf=normal>
+                    <tr *ngFor="let persona of personasTipo2">
+                        <td>{{ persona.cedula }}</td>
+                        <td>{{ persona.nombres }}</td>
+                        <td>{{ persona.apellidos }}</td>
+                        <td>{{ persona.celular }}</td>
+                        <td>{{ persona.activo ? 'Disponible' : 'No disponible' }}</td>
+                        <td>
+                            <button (click)="Editar(persona)">Cambiar estado</button>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody class="text-center" *ngIf="buscar">
+                    <tr >
+                        <td>{{ personasTipo2b.cedula }}</td>
+                        <td>{{ personasTipo2b.nombres }}</td>
+                        <td>{{ personasTipo2b.apellidos }}</td>
+                        <td>{{ personasTipo2b.celular }}</td>
+                        <td>{{ personasTipo2b.activo ? 'Disponible' : 'No disponible' }}</td>
+                        <td>
+                            <button (click)="Editar(personasTipo2b)">Editar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>

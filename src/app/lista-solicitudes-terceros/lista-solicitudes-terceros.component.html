@@ -1,0 +1,129 @@
+<body>
+    <div class="menu">
+      <ul>
+        
+        <button class="menuOp" (click)="listaPrestados()">Solicitudes Prestado</button>
+        <button class="menuOp" (click)="listaRecibidos()">Solicitudes Recibidas</button>
+        <button class="menuOp" (click)="listaNoDevueltos()">Libros No Devueltos</button>
+        <button class="menuOp" (click)="listaRestituidos()">Libros Restituido</button>
+        <button class="menuOp" (click)="listaDestruidos()">Libros Destruidos o Perdidos</button>
+      </ul>
+    </div>
+    <div class="imagen">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+        height="40" width="150" style="margin-left: 20%; margin-top: 1%;">
+    </div>
+  
+    <div class="card">
+      <h1 *ngIf="prestados==true">Lista de solicitudes prestadas a terceros</h1>
+      <h1 *ngIf="recibidos==true">Lista de solicitudes recibidas a terceros</h1>
+      <h1 *ngIf="nodevuelto==true">Libros no devueltos a terceros</h1>
+      <h1 *ngIf="restituido==true">Libros restituidos a terceros</h1>
+      <h1 *ngIf="destruido==true">Libros destruidos o perdidos a terceros</h1>
+      <h1 *ngIf="buscar==true">Buscar</h1>
+      <div class="buscar">
+        <form>
+          <input class="form-control me-2" #buscar2 type="search" placeholder="Buscar" aria-label="Buscar"
+            name="buscar" (keyup)="onKeydownEvent($event, buscar2.value)"
+            style="background-color: #e5e7e8; border-color: #004f9f;">
+        </form>
+      </div>
+      <table class="header">
+        <thead class="text-center cabezera">
+          <tr>
+            <th style="width: 15%;">Cedula</th>
+            <th style="width: 20%">Título del Libro</th>
+            <th style="width: 15%;">Fecha</th>
+            <th style="width: 15%;">Estado</th>
+            <th style="width: 20%;">Acciones</th>
+          </tr>
+        </thead>
+      </table>
+  
+      <div class="contenedor">
+        <table class="table">
+          <tbody class="text-center" *ngIf="prestados==true">
+            <tr *ngFor="let terceroP of listaterceroP">
+              <td style="width: 15%;" >
+                {{terceroP.tercero?.cedula}}
+              </td>
+              <td style="width: 20%">{{terceroP.prestamo?.libro?.titulo}}</td>
+              <td style="width: 15%;">{{terceroP.prestamo?.fechaFin}}</td>
+              <td style="width: 15%;">{{ getNombreEstado(terceroP.prestamo?.estadoPrestamo) }}</td>
+              <td style="width: 20%; ">
+                <button (click)="devolver(terceroP)">Devolver Libro</button>&nbsp;
+              </td>
+            </tr>
+          </tbody>
+          <tbody class="text-center" *ngIf="recibidos==true">
+            <tr *ngFor="let terceroP of listaterceroP">
+              <td style="width: 15%;" >
+                {{terceroP.tercero?.cedula}}
+              </td>
+              <td style="width: 20%">{{terceroP.prestamo?.libro?.titulo}}</td>
+              <td style="width: 15%;">{{terceroP.prestamo?.fechaFin}}</td>
+              <td style="width: 15%;">{{ getNombreEstado(terceroP.prestamo?.estadoPrestamo) }}</td>
+              <td style="width: 20%; ">
+                <button (click)="solicitudCompleta(terceroP)">Prestamo Completo</button>&nbsp;
+              </td>
+            </tr>
+          </tbody>
+          <tbody class="text-center" *ngIf="nodevuelto==true">
+            <tr *ngFor="let terceroP of listaterceroP">
+              <td style="width: 15%;" >
+                {{terceroP.tercero?.cedula}}
+              </td>
+              <td style="width: 20%">{{terceroP.prestamo?.libro?.titulo}}</td>
+              <td style="width: 15%; color: red;">{{terceroP.prestamo?.fechaFin}}</td>
+              <td style="width: 15%;">{{ getNombreEstado(terceroP.prestamo?.estadoPrestamo) }}</td>
+              <td style="width: 20%;">
+                <button (click)="devolver(terceroP)">Devolver Libro</button>&nbsp;
+              </td>
+            </tr>
+          </tbody>
+          <tbody class="text-center" *ngIf="restituido==true">
+            <tr *ngFor="let terceroP of listaterceroP">
+              <td style="width: 15%;" >
+                {{terceroP.tercero?.cedula}}
+              </td>
+              <td style="width: 20%">{{terceroP.prestamo?.libro?.titulo}}</td>
+              <td style="width: 15%;">{{terceroP.prestamo?.fechaFin}}</td>
+              <td style="width: 15%;">{{ getNombreEstado(terceroP.prestamo?.estadoPrestamo) }}</td>
+              <td style="width: 20%; ">
+                <button (click)="solicitudCompleta(terceroP)">Prestamo Completo</button>&nbsp;
+              </td>
+            </tr>
+          </tbody>
+          <tbody class="text-center" *ngIf="destruido==true">
+            <tr *ngFor="let terceroP of listaterceroP">
+              <td style="width: 15%;" >
+                {{terceroP.tercero?.cedula}}
+              </td>
+              <td style="width: 20%">{{terceroP.prestamo?.libro?.titulo}}</td>
+              <td style="width: 15%;">{{terceroP.prestamo?.fechaFin}}</td>
+              <td style="width: 15%;">{{ getNombreEstado(terceroP.prestamo?.estadoPrestamo) }}</td>
+              <td style="width: 20%; ">
+                <button (click)="devolucionR(terceroP)">Restituir Libro</button>&nbsp;
+              </td>
+            </tr>
+          </tbody>
+          <tbody class="text-center" *ngIf="buscar">
+            <tr *ngFor="let terceroP of listaterceroPb">
+              <td style="width: 15%;" >
+                {{terceroP.tercero?.cedula}}
+              </td>
+              <td style="width: 20%">{{terceroP.prestamo?.libro?.titulo}}</td>
+              <td style="width: 15%;">{{terceroP.prestamo?.fechaFin}}</td>
+              <td style="width: 15%;">{{ getNombreEstado(terceroP.prestamo?.estadoPrestamo) }}</td>
+              <td style="width: 20%;">
+                <button (click)="devolver(terceroP)">Devolver Libro</button>&nbsp;
+              </td>
+            </tr>
+          </tbody>
+  
+         
+        </table>
+      </div>
+    </div>
+  </body>

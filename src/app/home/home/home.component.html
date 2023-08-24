@@ -1,0 +1,101 @@
+<div class="imagen">
+  <img
+    src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+    height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+<!--FORMULARIO-->
+
+<body>
+
+  <div class="card">
+    <h1>Listado de libros</h1>
+    <form class="buscar">
+      <input class="form-control me-2" (keyup)="onKeydownEvent($event, buscaer.value)" #buscaer type="search"
+        placeholder="Buscar" aria-label="Buscar" style="background-color: #e5e7e8; border-color: #2e2f5e" />
+      <button (click)="buscarLibxNomb(buscaer.value)" class="btn" type="submit">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/Iconos%2Fbusqueda.png?alt=media&token=2b59078d-0ef5-4fa4-85c6-396ea7c1c97c" />
+      </button>
+    </form>
+    <table class="header">
+      <thead class="text-center cabezera">
+        <tr>
+          <th style="width: 6.5%;">Código</th>
+          <th style="width: 21.5%;">Título del Libro</th>
+          <th style="width: 10.5%;">Categoría</th>
+          <th style="width: 12%;">Año de Publicación</th>
+          <th style="width: 30.5%;">Descripción</th>
+          <th>Disposición</th>
+          <th style="width: 8.5%;">Accion</th>
+        </tr>
+      </thead>
+    </table>
+
+    <div class="contenedor">
+        <table class="table ">
+          <tbody class="text-center" *ngIf="normal">
+            <tr *ngIf="libros.length===0" >
+              <app-loader></app-loader>
+            </tr>
+            <tr *ngFor="let libro of libros">
+              <td  style="width: 6.5%;">{{ libro.id }}</td>
+              <td style="width: 21.5%;">{{ libro.titulo }}</td>
+              <td style="width: 10.5%;">{{ libro.area }}</td>
+              <td style="width: 12%;">{{ libro.anioPublicacion }}</td>
+              <td style="width: 30.5%;">{{ libro.descripcion }}</td>
+              <td>{{ libro.disponibilidad ? 'Disponible' : 'No disponible' }}</td>
+              <td *ngIf="libro.disponibilidad else menor">
+                <button (click)="SolicitarLibro(libro)">Solicitar</button>
+                <button *ngIf="mostrar==true" (click)="libroCompleto(libro)">Ver Libro</button>
+              </td>
+              <ng-template #menor>
+                <td>
+                 Ninguna
+                 <button *ngIf="mostrar==true" (click)="libroCompleto(libro)">Ver Libro</button>
+                </td>
+              </ng-template>
+            </tr>
+          </tbody>
+
+          <tbody class="text-center" *ngIf="buscar">
+            <tr *ngIf="libros.length===0" >
+              <app-loader></app-loader>
+            </tr>
+            <tr *ngFor="let libro of libros">
+              <td>{{ libro.id }}</td>
+              <td>{{ libro.titulo }}</td>
+              <td>{{ libro.area }}</td>
+              <td>{{ libro.anioPublicacion }}</td>
+              <td>{{ libro.descripcion }}</td>
+              <td>{{ libro.disponibilidad ? 'Disponible' : 'No disponible' }}</td>
+              <td *ngIf="libro.disponibilidad else menor" style="width: 8.5%;">
+                <button (click)="SolicitarLibro(libro)">Solicitar</button>
+              </td>
+              <ng-template #menor>
+                <td style="width: 8.5%;">
+                 Ninguna
+                 <button *ngIf="mostrar==true" (click)="libroCompleto(libro)">Ver Libro</button>
+                </td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="popup" id="popup">
+        <h3>Solicitud Enviada</h3>
+
+        <h4>Estimado {{datos}} la solicitud del libro "{{datoslibro}}" se ha creado correctamente
+          <hr> Porfavor toma una captura y facilita la busqueda de tu solicitud
+        </h4>
+        <div>
+          <canvas #qrCanvas style="margin-top: -7%;"></canvas>
+        </div>
+        <button id="cerrarpopup" sy (click)="cerrarpopup()" >
+          <FONT COLOR="white">Aceptar</FONT>
+        </button>
+      </div>
+    </div>
+</body>

@@ -1,0 +1,143 @@
+body {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Ffondo-blanco.jpg?alt=media&token=c8998dec-d6d9-4e39-a6f4-7aff45ede80d);
+    background-repeat: no-repeat;
+    background-position: 100%;
+  }
+  
+  
+  
+  
+  
+  .btn {
+    background-color: transparent;
+    width: 2%;
+  }
+  
+  button {
+    width: 30%;
+    height: 70%;
+    margin: auto;
+    margin-top: 3%;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 0.8em 1.3em 0.8em 0.9em;
+    color: white;
+    background: #1C69B7;
+    border: none;
+    border-radius: 16px;
+  }
+  
+  button img {
+    margin-right: 3px;
+    transform: rotate(30deg);
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  
+  button span {
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  
+  button:hover img {
+    transform: translateX(5px) rotate(90deg);
+  }
+  
+  button:hover span {
+    transform: translateX(7px);
+  }
+  
+  
+  
+  
+  
+  .form_main {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:transparent;
+    padding: 30px 30px 30px 30px;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.062);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #1C69B7;
+  }
+  
+  .form_main::before {
+    position: absolute;
+    content: "";
+    width: 300px;
+    height: 300px;
+    background-color: #1C69B7;
+    transform: rotate(45deg);
+    left: -180px;
+    bottom: 30px;
+    z-index: 1;
+    border-radius: 30px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.082);
+  }
+  
+  .heading {
+    font-size: 2em;
+    color: #2e2e2e;
+    font-weight: 700;
+    margin: 5px 0 10px 0;
+    z-index: 2;
+  }
+  
+  .inputContainer {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  
+  .inputIcon {
+    position: absolute;
+    left: 3px;
+  }
+  
+  .inputField {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid rgb(173, 173, 173);
+    margin: 10px 0;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+    box-sizing: border-box;
+    padding-left: 30px;
+  }
+  
+  .inputField:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(199, 114, 255);
+  }
+  
+  .inputField::placeholder {
+    color: rgb(80, 80, 80);
+    font-size: 1em;
+    font-weight: 500;
+  }
+  
+  .forgotLink {
+    z-index: 2;
+    font-size: .7em;
+    font-weight: 500;
+    color: rgb(44, 24, 128);
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+  }
+  

@@ -1,0 +1,191 @@
+body {
+    background-color: #004f9f;
+    flex-direction: column;
+}
+
+.comentario {
+    margin-top: 8%;
+    margin-left: 5%;
+    background-color: white;
+    width: 90%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    border-radius: 2%;
+}
+
+
+
+.contenedor-principal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+.contenedor {
+    width: 100%;
+    display: flex;
+    max-width: max-content;
+    background-color: #004f9f;
+
+}
+
+hr {
+    background-color: black;
+    height: 2px;
+}
+
+.tarjeta {
+    margin: 20px;
+    border-radius: 8px;
+    background: #012844;
+
+}
+
+.tarjeta .contenido {
+    margin: 30px;
+}
+
+.tarjeta .contenido .imagen {
+    align-content: center;
+    width: 350px;
+    height: 250px;
+    text-align: center;
+}
+
+h5 {
+    text-align: center;
+
+    box-shadow: 0px 1px 10px rgba(47, 25, 150, 0.2);
+    margin-top: 50px;
+}
+
+
+
+
+
+h1 {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 25px;
+    font-weight: bold;
+    color: #004f9f;
+    text-align: center;
+}
+
+.input-box {
+    display: flex;
+    max-width: 100%;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 1%;
+    justify-content: center;
+  }
+
+button {
+    width: 20%;
+    margin-top: 1.5%;
+    margin-left: 40%;
+    margin-bottom: 1.5%;
+    background: none;
+    border: none;
+    padding: 5px 5px;
+    background-color: #004f9f;
+    border-radius: 10px;
+  }
+  
+  button:hover {
+    background: rgba(170, 170, 170, 0.062);
+    transition: 0.5s;
+    
+  }
+  button:hover svg {
+    transition: 0.5s;
+    fill: #004f9f; /* Cambia el color de relleno del SVG dentro del hover del botón */
+  }
+  
+  button svg {
+    color: white;
+  }
+  .buttonspop{
+    display: flex;
+    background-color: #ffffff;
+    padding: auto;
+    
+    
+  }
+  .btn1{
+    background-color: #004f9f;
+    color: #ffffff;
+    
+  }
+  .btn2{
+    
+    background-color: #004f9f;
+    color: #ffffff;
+    justify-content: left;
+    margin: 7px 10px;
+  }
+
+  .button {
+    height: 50px;
+    width: 150px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    left: 5%;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .button:hover {
+    box-shadow: .5px .5px 150px #252525;
+  }
+  
+  .type1::after {
+    content: "Gracias";
+    height: 50px;
+    width: 150px;
+    background-color: #093057;
+    color: #fff;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transform: translateY(50px);
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .type1::before {
+    content: "Sugerir";
+    height: 50px;
+    width: 150px;
+    background-color: #fff;
+    color: #2426a6;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transform: translateY(0px) scale(1.2);
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .type1:hover::after {
+    transform: translateY(0) scale(1.2);
+  }
+  
+  .type1:hover::before {
+    transform: translateY(-50px) scale(0) rotate(120deg);
+  }

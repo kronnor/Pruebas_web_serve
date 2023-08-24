@@ -1,0 +1,109 @@
+<div class="imagen">
+  <img
+    src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+    height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+<!--FORMULARIO-->
+
+<body class="elemento">
+  <div class="card">
+    <h1>Registro de personal</h1>
+    <div class="content">
+      <form ngNativeValidate (ngSubmit)="avanzar1()">
+        <div class="step-counter">
+          <div class="user-details">
+            <div class="input-box">
+              <span class="details">Cedula bibliotecario:</span>
+              <input #cedulas type="text" class="form-control text-center" (keyup)="buscarFenix(cedulas.value)"
+                [(ngModel)]="persona.cedula" placeholder="Ingrese un numero de cedula" name="cedula" required>
+              <button type="button" (click)="buscarFenix(cedulas.value)" class="btn btn-outline-secondary"
+                style="display: flex; margin-left: 1%; height: 10%; margin-top: 5px;">
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/Iconos%2Fbusqueda.png?alt=media&token=2b59078d-0ef5-4fa4-85c6-396ea7c1c97c"
+                  width="20" height="20">
+              </button>
+            </div>
+
+            <div class="input-box">
+              <span class="details">Nombres:</span>
+              <input #nombre type="text" class="form-control text-center" [(ngModel)]="persona.nombres"
+                placeholder="Aqui apareceran sus datos" name="nombre" required readonly>
+              <span class="details">Apellidos:</span>
+              <input #apellidos type="text" class="form-control text-center" [(ngModel)]="persona.apellidos"
+                placeholder="Aqui apareceran sus datos" name="apellidos" required readonly>
+
+
+            </div>
+
+            <div class="input-box">
+              <span class="details">Celular:</span>
+              <input type="number" class="form-control text-center" [(ngModel)]="persona.celular"
+                placeholder="Aqui apareceran sus datos" name="celular" required>
+            </div>
+
+            <div class="input-box">
+              <span class="details">Email:</span>
+              <input type="email" class="form-control text-center" [(ngModel)]="persona.correo"
+                placeholder="Aqui apareceran sus datos" name="correo" required>
+
+
+            </div>
+
+
+
+            <div class="input-box">
+              <span class="details" style="margin-right: 20%;">Rol:</span>
+              <input class="form-check-input" type="radio" name="flexRadioDefault1" value="4" id="admin"
+                [(ngModel)]="persona.tipo"  (change)="onRolSeleccionado()" style="height: 20px; width: 20px;" required>
+              <label class="form-check-label" for="flexRadioDefault3" style="margin-right: 10%;">
+                Administrador
+              </label>
+
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <input class="form-check-input" type="radio" name="flexRadioDefault1" value="3" id="biblioteca"
+                [(ngModel)]="persona.tipo"  (change)="onRolSeleccionado()" style="height: 20px; width: 20px; " required><label class="form-check-label" for="flexRadioDefault4">
+                Bibliotecario
+              </label>
+            </div>
+
+            <div class="input-box">
+              <span class="details" style="margin-right: 20%;">Estado:</span>
+
+              <input class="form-check-input" type="radio" name="flexRadioDefault" value="true" id="activo"
+                [(ngModel)]="bibliotecarios.activoBibliotecario" style="height: 20px; width: 20px; " required>
+              &nbsp;&nbsp;<label class="form-check-label" for="flexRadioDefault1" style="margin-right: 10%;">
+                Activo
+              </label>
+
+
+              <input class="form-check-input" type="radio" name="flexRadioDefault" value="false" id="inactivo"
+                [(ngModel)]="bibliotecarios.activoBibliotecario" style="height: 20px; width: 20px;" required>
+              &nbsp;&nbsp;<label class="form-check-label" for="flexRadioDefault2">
+                Inactivo
+              </label>
+
+
+
+            </div>
+
+          </div>
+
+
+
+
+        </div>
+        <button type="submit" class="btn  btn-lg mx-3">
+          Guardar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-folder-check" viewBox="0 0 16 16">
+            <path
+              d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
+            <path
+              d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z" />
+          </svg>
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+</body>

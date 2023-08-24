@@ -1,0 +1,68 @@
+<div class="imagen">
+  <img
+    src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+    height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+<!--FORMULARIO-->
+
+<body>
+  <div class="card">
+    <h1>Modificar Personal</h1>
+    <div class="content">
+      <form  ngNativeValidate
+        (ngSubmit)="actualizarBibliotecario(persona)">
+        <div class="input-box">
+          <span class="details">Cédula:</span>
+          <input #cedulas type="number" class="input2 form-control text-center" [(ngModel)]="persona.cedula"
+            placeholder="Ingrese un numero de cedula" name="cedula" readonly required>
+        </div>
+
+
+
+        <div class="input-box">
+          <span class="details">Nombres:</span>
+          <input #nombre type="text" class="input2 form-control text-center" [(ngModel)]="persona.nombres"
+            placeholder="Aqui apareceran sus datos" name="nombre" readonly required>
+        </div>
+
+        <div class="input-box">
+          <span class="details">Apellidos:</span>
+          <input #nombre type="text" class="input2 form-control text-center" [(ngModel)]="persona.apellidos"
+            placeholder="Aqui apareceran sus datos" name="apellidos" readonly required>
+        </div>
+
+        <div class="input-box">
+          <span class="details">Celular:</span>
+          <input type="number" class="input2 form-control text-center" [(ngModel)]="persona.celular"
+            placeholder="Aqui apareceran sus datos" name="celular" required>
+        </div>
+        <div class="input-box">
+          <span class="details">Email:</span>
+          <input type="email" class="input2 form-control text-center" [(ngModel)]="persona.correo"
+            placeholder="Aqui apareceran sus datos" name="correo" required>
+        </div>
+
+
+
+
+        <div class="input-box">
+          <span class="details">Estado:</span>
+          <input type="text" class="input3 form-control text-center" name="correo"
+            value="Estado Anterior: {{getNombreEstado(persona.activo)}}" disabled>
+          <input class="form-check-input" type="radio" name="flexRadioDefault" value="true" id="activo"
+            [(ngModel)]="persona.activo" required>
+          <label class="form-check-label" for="flexRadioDefault1">Activo</label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <input class="form-check-input" type="radio" name="flexRadioDefault" value="false" id="inactivo"
+            [(ngModel)]="persona.activo" required>
+          &nbsp;&nbsp;
+          <label class="form-check-label" for="flexRadioDefault2">Inactivo</label>
+        </div>
+
+
+        <button class="btn" type="submit"> Modificar</button>
+
+
+      </form>
+    </div>
+  </div>
+</body>

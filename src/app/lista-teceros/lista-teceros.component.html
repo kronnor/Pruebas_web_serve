@@ -1,0 +1,50 @@
+<div class="imagen">
+    <img src="https://firebasestorage.googleapis.com/v0/b/istateca.appspot.com/o/logos%2Flogo%20normal%20peque%C3%B1o.png?alt=media&token=59a16c73-3229-4ba7-81be-567aae799d61"
+        height="60" width="200" style="margin-left: 10%; margin-top: 1%;">
+</div>
+<!--FORMULARIO-->
+
+
+
+
+
+<body class="elemento">
+    <div class="card">
+        <h1>Lista de personas agenas ha la institución</h1>
+        <form class="buscar">
+            <input class="form-control me-2" (keyup)="onKeydownEvent($event, buscaer.value)" #buscaer type="search"
+              placeholder="Buscar por cedula" aria-label="Buscar" style="background-color: #e5e7e8; border-color: #2e2f5e" />
+            
+          </form>
+        <div class="contenedor">
+            <table class="table">
+                <thead class="text-center cabezera">
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Celular</th>
+                    </tr>
+
+                </thead>
+                <tbody class="text-center" *ngIf=normal>
+                    <tr *ngFor="let persona of personasTipo2">
+                        <td>{{ persona.cedula }}</td>
+                        <td>{{ persona.nombre }}</td>
+                        <td>{{ persona.correo }}</td>
+                        <td>{{ persona.telefono }}</td>
+                    </tr>
+                </tbody>
+
+                <tbody class="text-center" *ngIf="buscar">
+                    <tr >
+                        <td>{{ personasTipo2b.cedula }}</td>
+                        <td>{{ personasTipo2b.nombre }}</td>
+                        <td>{{ personasTipo2b.correo }}</td>
+                        <td>{{ personasTipo2b.telefono }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
